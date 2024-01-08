@@ -153,3 +153,13 @@ app.get('/users/purchasedCourses', authenticateJwt, async (req, res) => {
 });
 
 app.listen(3000, () => console.log('Server running on port 3000'));
+
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.3.1"
+  }
+}
+
