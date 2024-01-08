@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import { useState } from 'react';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -31,6 +31,8 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -43,16 +45,14 @@ export default function SignUp() {
   return (
 
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="m" display="flex" justifyContent="center">
+      <Container component="main" maxWidth="m">
         <CssBaseline />
         <Box
           sx={{
             marginTop: 8,
-           paddingLeft:50,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent:'center',
             
           }}
         >
@@ -64,6 +64,10 @@ export default function SignUp() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
             <TextField
+              onChange={
+                setEmail(e.target.value)
+
+              }
               margin="normal"
               required
               fullWidth
@@ -74,6 +78,10 @@ export default function SignUp() {
               autoFocus
             />
             <TextField
+             onChange={
+              setPassword(e.target.value)
+
+            }
               margin="normal"
               required
               fullWidth
@@ -92,6 +100,26 @@ export default function SignUp() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={()=>{
+                function callback2(data){
+                  localStorage.setItem("token",data.token);
+                }
+               function callback1(res){
+                res.json().then(callback2)
+               }
+               fetch("http://localhost:3000/admin/signup", {
+                method : "POST",
+                body: JSON.stringify({
+                  username:Email,
+                  password:Password
+                }),
+                headers:{
+                  "content-type": "application/json"
+                }
+
+               }).then(callback1)
+              
+              }}
             >
               Sign Up
             </Button>
