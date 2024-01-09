@@ -64,8 +64,10 @@ export default function SignUp() {
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 2 }}>
             <TextField
-              onChange={
+              onChange={(e)=>{
+                
                 setEmail(e.target.value)
+        }
 
               }
               margin="normal"
@@ -78,8 +80,8 @@ export default function SignUp() {
               autoFocus
             />
             <TextField
-             onChange={
-              setPassword(e.target.value)
+             onChange={(e)=>{
+              setPassword(e.target.value)}
 
             }
               margin="normal"
