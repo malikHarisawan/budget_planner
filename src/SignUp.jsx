@@ -105,6 +105,7 @@ export default function SignUp() {
               onClick={()=>{
                 function callback2(data){
                   localStorage.setItem("token",data.token);
+                  window.location = "/home";
                 }
                function callback1(res){
                 res.json().then(callback2)

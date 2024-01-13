@@ -7,9 +7,17 @@ const ExpenseTracker = () => {
   const [amount, setAmount] = useState('');
 
   useEffect(() => {
-    const localStorageTransactions = JSON.parse(localStorage.getItem('transactions'));
-    const initialTransactions = localStorageTransactions || [];
-    setTransactions(initialTransactions);
+    
+    fetch("http://localhost:3000/admin/courses",{
+      headers:{
+        method: 'GET',
+        "Authorization":"Bearer "+localStorage.getItem("token")
+      }
+    }).then(res => res.json()).then(data =>
+      { 
+console.log(data.courses) 
+setTransactions(data.courses)     })
+      
   }, []);
 
   const addTransaction = (e) => {
@@ -132,7 +140,6 @@ const ExpenseTracker = () => {
             }),
             headers:{
               "content-type": "application/json",
-              "Authorization":"Bearer "+localStorage.getItem("token")
             }
 
            })
